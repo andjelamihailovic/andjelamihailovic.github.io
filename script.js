@@ -1,11 +1,14 @@
 const KONTAKT_MEJL = "a56rtist@gmail.com";
 
-// Tekstovi za pojedine kategorije (ovde kasnije možeš upisati tekstove iz 1.txt - 4.txt)
 const OPISI_KATEGORIJA = {
-  "Moji počeci": "",
-  "Portreti kućnih ljubimaca": "",
-  "Portreti po želji": "",
-  "Crno-beli portreti": ""
+  "Moji počeci":
+    "Kolekcija radova nastalih iz lične inspiracije i iskrene želje za stvaranjem.\n\nSvaki od ovih radova ima posebno mesto u mom stvaralaštvu, budući da predstavljaju prve korake na mom umetničkom putu i ostaju među mojim najdražim delima.",
+  "Portreti kućnih ljubimaca":
+    "Posebno mesto u mom radu zauzimaju portreti naših malih čupavih prijatelja. Kroz realističan prikaz i pažljivo oslikane detalje, cilj mi je da što vernije prenesem njihov izgled i karakter, stvarajući pritom posebnu uspomenu koja će zauvek čuvati njihovu jedinstvenost.",
+  "Portreti po želji":
+    "Portreti predstavljaju poseban način da sačuvamo uspomenu na nama drage osobe, obradujemo nekoga posebnim poklonom ili ovekovečimo sopstveni lik. Svaki rad nastaje prema ličnim željama i zamislima, uz nastojanje da zadrži lični pečat i prenese emociju i značaj uspomene koju predstavlja.",
+  "Crno-beli portreti":
+    "Ove tehnike pružaju poseban doživljaj kroz igru svetlosti i senke, kao i suptilne tonske prelaze. Idealan su izbor za one koji vole izražajnost crno-belih tonova i žele da posebnu fotografiju sačuvaju u vidu jedinstvenog crteža."
 };
 
 const KATEGORIJE = [
@@ -204,6 +207,7 @@ function prikaziGaleriju() {
   const opis = OPISI_KATEGORIJA[aktivnaKategorija];
   if (opisKategorijeEl) {
     if (aktivnaKategorija !== "Svi radovi" && opis && opis.trim() !== "") {
+      opisKategorijeEl.style.whiteSpace = "pre-line";
       opisKategorijeEl.textContent = opis;
       opisKategorijeEl.hidden = false;
     } else {
