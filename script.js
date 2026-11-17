@@ -69,13 +69,48 @@ const SLIDESHOW_RADOVI = [
   { kategorija: "Moji počeci", fajl: "Pogled večnosti-Ulje na platnu, 30 × 40 cm, 2024.jpeg" }
 ];
 
+function generisiKandidatePutanja(kategorija, fajl) {
+  const varijanteFajla = [
+    fajl,
+    fajl.replace(/\.jpeg$/i, ".jpg"),
+    fajl.replace(/×/g, "x"),
+    fajl.replace(/×/g, "x").replace(/\.jpeg$/i, ".jpg"),
+    fajl.replace("-", " - "),
+    fajl.replace("-", " - ").replace(/\.jpeg$/i, ".jpg"),
+    fajl.replace("-", " - ").replace(/×/g, "x"),
+    fajl.replace("-", " - ").replace(/×/g, "x").replace(/\.jpeg$/i, ".jpg")
+  ];
+
+  const jedinstvene = [];
+  varijanteFajla.forEach((f) => {
+    [f.normalize("NFC"), f.normalize("NFD")].forEach((normF) => {
+      const p = encodeURI(`images/${kategorija}/${normF}`);
+      if (!jedinstvene.includes(p)) jedinstvene.push(p);
+    });
+  });
+  return jedinstvene;
+}
+
+function postaviSlikuSaRezervom(img, kandidati, onSveNeuspesno) {
+  let indeks = 0;
+  img.src = kandidati[0];
+  img.addEventListener("error", () => {
+    indeks += 1;
+    if (indeks < kandidati.length) {
+      img.src = kandidati[indeks];
+    } else if (onSveNeuspesno) {
+      onSveNeuspesno();
+    }
+  });
+}
+
 function parsirajRad(rad) {
   const bezEkstenzije = rad.fajl.replace(/\.[^.]+$/, "");
   const crtica = bezEkstenzije.indexOf("-");
   const naziv = crtica !== -1 ? bezEkstenzije.slice(0, crtica).trim() : bezEkstenzije;
   const detalji = crtica !== -1 ? bezEkstenzije.slice(crtica + 1).trim() : "";
-  const putanja = encodeURI(`images/${rad.kategorija}/${rad.fajl}`);
-  return { ...rad, naziv, detalji, putanja };
+  const kandidati = generisiKandidatePutanja(rad.kategorija, rad.fajl);
+  return { ...rad, naziv, detalji, kandidati };
 }
 
 const obradjeniRadovi = SVI_RADOVI.map(parsirajRad);
@@ -125,7 +160,7 @@ if (scena && tockiceKontejner) {
     slajd.className = indeks === 0 ? "slajd aktivan" : "slajd";
 
     const img = document.createElement("img");
-    img.src = rad.putanja;
+    postaviSlikuSaRezervom(img, rad.kandidati);
     img.alt = `${rad.naziv} — ${rad.detalji}`;
     if (indeks > 0) img.loading = "lazy";
 
@@ -226,11 +261,10 @@ function prikaziGaleriju() {
     okvir.className = "rad-okvir";
 
     const img = document.createElement("img");
-    img.src = rad.putanja;
     img.alt = `${rad.naziv} — ${rad.detalji}`;
     img.loading = "lazy";
 
-    img.addEventListener("error", () => {
+    postaviSlikuSaRezervom(img, rad.kandidati, () => {
       okvir.innerHTML = `<div class="rad-placeholder">Slika u pripremi:<br>${rad.naziv}</div>`;
     });
 
@@ -269,19 +303,15 @@ function osveziLightbox() {
   if (lbNapomena) lbNapomena.hidden = true;
   if (lbSlika) {
     lbSlika.hidden = false;
-    lbSlika.src = rad.putanja;
     lbSlika.alt = `${rad.naziv} — ${rad.detalji}`;
+    postaviSlikuSaRezervom(lbSlika, rad.kandidati, () => {
+      lbSlika.hidden = true;
+      if (lbNapomena) lbNapomena.hidden = false;
+    });
   }
   if (lbNaziv) lbNaziv.textContent = rad.naziv;
   if (lbDetalji) lbDetalji.textContent = rad.detalji;
   if (lbBrojac) lbBrojac.textContent = `${trenutniLightboxIndeks + 1} / ${lista.length}`;
-}
-
-if (lbSlika) {
-  lbSlika.addEventListener("error", () => {
-    lbSlika.hidden = true;
-    if (lbNapomena) lbNapomena.hidden = false;
-  });
 }
 
 function otvoriLightbox(indeks) {
