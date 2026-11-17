@@ -4,11 +4,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anđela Mihailović — Umetnica</title>
+    <title>Anđela Mihailović — Umetnica | Realistični portreti po porudžbini</title>
     <meta
       name="description"
+      content="Portfolio Anđele Mihailović, umetnice iz Srbije (Beograd) — izrada realističnih portreta kućnih ljubimaca i ljudi tehnikom ulja na platnu, grafitne olovke i uglja."
+    />
+    <meta
+      name="keywords"
+      content="Anđela Mihailović, umetnica Srbija, slikarka Beograd, portreti po porudžbini, portreti kućnih ljubimaca, ulje na platnu, grafitna olovka, ugalj, realistični portreti"
+    />
+    <meta name="author" content="Anđela Mihailović" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://andjelamihailovic.github.io/" />
+    <link rel="icon" type="image/png" href="images/Logo.png" />
+
+    <!-- Lokacijski meta podaci (Srbija / Beograd) -->
+    <meta name="geo.region" content="RS" />
+    <meta name="geo.placename" content="Beograd, Srbija" />
+    <meta name="geo.position" content="44.8176;20.4633" />
+    <meta name="ICBM" content="44.8176, 20.4633" />
+
+    <!-- Open Graph (Facebook, Instagram, Viber, WhatsApp) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sr_RS" />
+    <meta property="og:site_name" content="Anđela Mihailović — Umetnica" />
+    <meta property="og:title" content="Anđela Mihailović — Umetnica | Realistični portreti" />
+    <meta
+      property="og:description"
+      content="Realistični portreti kućnih ljubimaca i dragih osoba u ulju na platnu, grafitnoj olovci i uglju. Beograd, Srbija."
+    />
+    <meta property="og:url" content="https://andjelamihailovic.github.io/" />
+    <meta property="og:image" content="https://andjelamihailovic.github.io/images/Logo.png" />
+
+    <!-- Twitter / X kartica -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anđela Mihailović — Umetnica" />
+    <meta
+      name="twitter:description"
       content="Portfolio Anđele Mihailović — realistični portreti u ulju na platnu, grafitnoj olovci i uglju."
     />
+    <meta name="twitter:image" content="https://andjelamihailovic.github.io/images/Logo.png" />
+
+    <!-- Strukturirani podaci za Google pretragu (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anđela Mihailović",
+        "jobTitle": "Umetnica i slikarka",
+        "description": "Mlada umetnica iz Srbije specijalizovana za realistične portrete kućnih ljubimaca i ljudi tehnikom ulja na platnu, grafitne olovke i uglja.",
+        "url": "https://andjelamihailovic.github.io/",
+        "image": "https://andjelamihailovic.github.io/images/Logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Beograd",
+          "addressCountry": "RS"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Srbija"
+        },
+        "sameAs": [
+          "https://www.instagram.com/a56rtist",
+          "https://www.facebook.com/andjela.mihailovic.545402",
+          "https://www.threads.net/@a56rtist"
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,8 +129,13 @@
     </header>
 
     <main>
-      <!-- HERO -->
+      <!-- HERO SA ZAMAGLJENOM POZADINOM RADOVA -->
       <section class="hero" id="pocetna">
+        <div class="hero-pozadina" aria-hidden="true">
+          <div class="slideshow-scena" data-slideshow-scena></div>
+          <div class="hero-prekrivac"></div>
+        </div>
+
         <div class="hero-zaglavlje">
           <div class="omotac hero-unutrasnjost">
             <div class="hero-logo-okvir" data-logo-okvir>
@@ -76,8 +143,6 @@
                 class="hero-logo"
                 src="images/Logo.png"
                 alt="Logo Anđele Mihailović"
-                width="120"
-                height="120"
               />
             </div>
 
@@ -85,6 +150,10 @@
             <p class="hero-podnaslov">
               Umetnica • Ulje na platnu, grafitna olovka i ugalj
             </p>
+
+            <div class="hero-akcija">
+              <a class="dugme" href="#galerija">Pogledaj galeriju</a>
+            </div>
 
             <ul class="drustvene hero-drustvene" aria-label="Društvene mreže">
               <li>
@@ -125,40 +194,6 @@
               </li>
             </ul>
           </div>
-        </div>
-
-        <div
-          class="slideshow"
-          data-slideshow
-          aria-roledescription="karusel"
-          aria-label="Izabrani radovi"
-        >
-          <div class="slideshow-scena" data-slideshow-scena></div>
-
-          <button
-            class="slideshow-strela slideshow-strela--prethodna"
-            type="button"
-            aria-label="Prethodna slika"
-            data-slideshow-prethodna
-          >
-            <span aria-hidden="true">‹</span>
-          </button>
-
-          <button
-            class="slideshow-strela slideshow-strela--sledeca"
-            type="button"
-            aria-label="Sledeća slika"
-            data-slideshow-sledeca
-          >
-            <span aria-hidden="true">›</span>
-          </button>
-
-          <div
-            class="slideshow-tockice"
-            role="group"
-            aria-label="Izbor slike"
-            data-slideshow-tockice
-          ></div>
         </div>
       </section>
 
