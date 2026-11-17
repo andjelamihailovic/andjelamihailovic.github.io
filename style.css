@@ -206,7 +206,7 @@ textarea {
 
 .slajd {
   position: absolute;
-  inset: -24px;
+  inset: -16px;
   opacity: 0;
   transition: opacity 1.8s ease-in-out;
   pointer-events: none;
@@ -221,20 +221,25 @@ textarea {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: blur(11px) saturate(0.95);
-  transform: scale(1.04);
+  filter: blur(6px) saturate(1.02);
+  transform: scale(1.03);
 }
 
 .hero-prekrivac {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(250, 248, 245, 0.78) 0%,
-    rgba(250, 248, 245, 0.84) 55%,
-    rgba(250, 248, 245, 0.94) 100%
-  );
-  backdrop-filter: blur(2px);
+  background: radial-gradient(
+      circle at center,
+      rgba(250, 248, 245, 0.72) 0%,
+      rgba(250, 248, 245, 0.56) 65%,
+      rgba(250, 248, 245, 0.64) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(250, 248, 245, 0.25) 0%,
+      rgba(250, 248, 245, 0.15) 70%,
+      rgba(250, 248, 245, 0.55) 100%
+    );
 }
 
 .hero-zaglavlje {
@@ -269,6 +274,7 @@ textarea {
   max-height: 150px;
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 2px 12px rgba(250, 248, 245, 0.85));
 }
 
 .hero-ime {
@@ -279,6 +285,7 @@ textarea {
   line-height: 1.08;
   letter-spacing: 0.01em;
   color: var(--tekst);
+  text-shadow: 0 2px 18px rgba(250, 248, 245, 0.9);
 }
 
 .hero-podnaslov {
@@ -288,6 +295,7 @@ textarea {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--maslinasta-tamnija);
+  text-shadow: 0 1px 12px rgba(250, 248, 245, 0.95);
 }
 
 .hero-akcija {
@@ -597,7 +605,7 @@ textarea {
   font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--maslinasta);
-  background-color: rgba(250, 248, 245, 0.75);
+  background-color: rgba(250, 248, 245, 0.85);
   cursor: pointer;
   transition: all var(--prelaz);
 }
