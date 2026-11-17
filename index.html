@@ -1,0 +1,523 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="sr-Latn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anđela Mihailović — Umetnica</title>
+    <meta
+      name="description"
+      content="Portfolio Anđele Mihailović — realistični portreti u ulju na platnu, grafitnoj olovci i uglju."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <a class="preskoci-link" href="#galerija">Preskoči na galeriju</a>
+
+    <!-- Ikone društvenih mreža (jedan izvor za sve linkove) -->
+    <svg class="ikone" aria-hidden="true" focusable="false">
+      <symbol id="ikona-instagram" viewBox="0 0 24 24">
+        <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" />
+        <circle cx="12" cy="12" r="4.1" />
+        <circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" stroke="none" />
+      </symbol>
+      <symbol id="ikona-facebook" viewBox="0 0 24 24">
+        <path
+          d="M13.8 21.4v-8.1h2.7l.42-3.16H13.8V8.2c0-.91.25-1.53 1.56-1.53h1.67V3.86c-.29-.04-1.28-.13-2.44-.13-2.41 0-4.06 1.47-4.06 4.17v2.34H7.8v3.16h2.73v8.1"
+        />
+      </symbol>
+      <symbol id="ikona-threads" viewBox="0 0 24 24">
+        <path
+          d="M12 3.2c-4.4 0-7.4 3.2-7.4 8.8s3 8.8 7.4 8.8c4.5 0 6.6-2.4 6.6-4.6 0-2.4-1.9-3.9-4.6-3.9-2.6 0-4.4 1.2-4.4 3 0 1.6 1.3 2.7 3.2 2.7 2.8 0 4.6-2.3 4.6-5.6 0-3.7-2.4-6-5.4-6-2.3 0-4 1.1-5.1 3"
+        />
+      </symbol>
+    </svg>
+
+    <header class="header" data-header>
+      <div class="omotac header-unutrasnjost">
+        <button
+          class="meni-dugme"
+          type="button"
+          aria-expanded="false"
+          aria-controls="glavna-navigacija"
+          aria-label="Meni"
+          data-meni-dugme
+        >
+          <span class="meni-dugme-linije" aria-hidden="true"></span>
+          <span class="meni-dugme-tekst">Meni</span>
+        </button>
+
+        <nav class="navigacija" id="glavna-navigacija" data-navigacija>
+          <a href="#o-meni">O meni</a>
+          <a href="#galerija">Galerija</a>
+          <a href="#pristup-radu">Pristup radu</a>
+          <a href="#porucivanje">Poručivanje</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="pocetna">
+        <div class="hero-zaglavlje">
+          <div class="omotac hero-unutrasnjost">
+            <div class="hero-logo-okvir" data-logo-okvir>
+              <img
+                class="hero-logo"
+                src="images/Logo.jpg"
+                alt="Logo Anđele Mihailović"
+                width="120"
+                height="120"
+              />
+            </div>
+
+            <h1 class="hero-ime">Anđela Mihailović</h1>
+            <p class="hero-podnaslov">
+              Umetnica • Ulje na platnu, grafitna olovka i ugalj
+            </p>
+
+            <ul class="drustvene hero-drustvene" aria-label="Društvene mreže">
+              <li>
+                <a
+                  href="https://www.instagram.com/a56rtist"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-instagram"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/andjela.mihailovic.545402"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-facebook"></use>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.threads.net/@a56rtist"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Threads"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-threads"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="slideshow"
+          data-slideshow
+          aria-roledescription="karusel"
+          aria-label="Izabrani radovi"
+        >
+          <div class="slideshow-scena" data-slideshow-scena></div>
+
+          <button
+            class="slideshow-strela slideshow-strela--prethodna"
+            type="button"
+            aria-label="Prethodna slika"
+            data-slideshow-prethodna
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+
+          <button
+            class="slideshow-strela slideshow-strela--sledeca"
+            type="button"
+            aria-label="Sledeća slika"
+            data-slideshow-sledeca
+          >
+            <span aria-hidden="true">›</span>
+          </button>
+
+          <div
+            class="slideshow-tockice"
+            role="group"
+            aria-label="Izbor slike"
+            data-slideshow-tockice
+          ></div>
+        </div>
+      </section>
+
+      <!-- O MENI -->
+      <section class="o-meni" id="o-meni">
+        <div class="omotac o-meni-mreza">
+          <div class="foto-kolaz">
+            <div class="foto foto-glavna" data-foto>
+              <img
+                src="images/Fotografije%20Autorice%20za%20sekciju%20O%20meni/An%C4%91ela.jpeg"
+                alt="Anđela Mihailović"
+                loading="lazy"
+                data-opis-placeholdera="Fotografija autorke"
+              />
+            </div>
+            <div class="foto foto-detalj" data-foto>
+              <img
+                src="images/Fotografije%20Autorice%20za%20sekciju%20O%20meni/An%C4%91ela1.jpeg"
+                alt="Anđela Mihailović — detalj"
+                loading="lazy"
+                data-opis-placeholdera="Fotografija autorke"
+              />
+            </div>
+          </div>
+
+          <div class="o-meni-tekst">
+            <h2 class="naslov-sekcije">O meni</h2>
+
+            <p class="uvodni-pasus">
+              Ja sam Anđela Mihailović, mlada samouka umetnica iz Srbije i
+              studentkinja likovnih i primenjenih umetnosti u Beogradu.
+            </p>
+
+            <p>
+              Ljubav prema crtanju i umetnosti javila se još u detinjstvu, iako
+              joj se dugo nisam ozbiljnije posvećivala. Sve je počelo spontano,
+              kada sam naslikala svoju prvu sliku uljem na platnu. Taj prvi
+              pokušaj probudio je u meni želju da nastavim, pa je slikarstvo
+              vremenom postalo deo moje svakodnevice. Od 2024. godine mu se
+              posvećujem aktivnije, gotovo svakodnevno, kroz vežbanje,
+              istraživanje i neprestano usavršavanje.
+            </p>
+
+            <p>
+              Posebno me inspirišu životinje, njihova individualnost i karakter,
+              ali i ljudi, emocije i trenuci koje želimo da sačuvamo. Najviše
+              uživam u stvaranju realističnih portreta, nastojeći da kroz
+              detalje i teksturu prenesem priču koja stoji iza svake slike.
+            </p>
+
+            <p>
+              Najčešće radim tehnikom ulja na platnu, a bavim se i crtežom
+              grafitnom olovkom i ugljem.
+            </p>
+
+            <p>
+              Verujem da je svaki novi rad prilika za učenje, napredak i
+              otkrivanje novih načina izražavanja. Svesna sam da sam tek na
+              početku svog umetničkog puta i da još ne znam kuda će me odvesti,
+              ali sam spremna da učim, istražujem i pomeram sopstvene granice.
+              Najvažnije mi je da nastavim da stvaram i otkrivam dokle me ljubav
+              prema umetnosti može odvesti.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERIJA -->
+      <section class="galerija" id="galerija">
+        <div class="omotac">
+          <p class="nadnaslov">Portfolio</p>
+          <h2 class="naslov-sekcije naslov-sekcije--centrirano">Galerija</h2>
+
+          <div
+            class="tabovi"
+            role="group"
+            aria-label="Kategorije radova"
+            data-tabovi
+          ></div>
+
+          <div class="opis-kategorije" data-opis-kategorije hidden></div>
+
+          <div class="galerija-mreza" data-galerija></div>
+        </div>
+      </section>
+
+      <!-- PRISTUP RADU -->
+      <section class="pristup" id="pristup-radu">
+        <div class="omotac">
+          <div class="pristup-zaglavlje">
+            <p class="nadnaslov">Pristup radu</p>
+            <h2 class="naslov-sekcije">Umetnički pristup i proces rada</h2>
+          </div>
+
+          <div class="pristup-mreza">
+            <article class="kartica">
+              <h3 class="kartica-naslov">Snaga detalja i pogleda</h3>
+              <p class="kartica-tekst">
+                U realističnom portretu najvažniji je onaj tihi trenutak
+                prepoznavanja. Svaki potez četkicom ili grafitnom olovkom
+                usmeren je ka tome da se na platnu ili papiru oseti karakter,
+                toplina i živost pogleda.
+              </p>
+            </article>
+
+            <article class="kartica">
+              <h3 class="kartica-naslov">Slojevitost ulja i teksture</h3>
+              <p class="kartica-tekst">
+                Rad uljem na platnu zahteva strpljenje i vreme. Kroz postepeno
+                građenje svetla, senki i bogatih tekstura, svaka slika dobija
+                dubinu koja čuva uspomenu i priču iza samog motiva.
+              </p>
+            </article>
+
+            <article class="kartica">
+              <h3 class="kartica-naslov">Portret kao trajna uspomena</h3>
+              <p class="kartica-tekst">
+                Bilo da je reč o vernom kućnom ljubimcu ili dragoj osobi, svaki
+                rad nastaje s posebnom pažnjom i posvećenošću, pretvarajući
+                fotografiju i emociju u jedinstveno umetničko delo.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORUČIVANJE -->
+      <section class="porucivanje" id="porucivanje">
+        <div class="omotac porucivanje-unutrasnjost">
+          <p class="nadnaslov">Poručivanje portreta</p>
+          <h2 class="naslov-sekcije naslov-sekcije--centrirano">
+            Sačuvajte uspomenu
+          </h2>
+          <p class="porucivanje-tekst">
+            Ako želite da sačuvate uspomenu na svog ljubimca ili dragu osobu,
+            možete poručiti realističan portret rađen uljem na platnu,
+            grafitnom olovkom ili ugljem. Svaki rad nastaje prema vašoj
+            fotografiji, uz pažljivo usklađivanje formata i detalja.
+          </p>
+          <p class="porucivanje-tehnike">
+            Ulje na platnu <span aria-hidden="true">·</span> Grafitna olovka
+            <span aria-hidden="true">·</span> Ugalj
+          </p>
+          <a class="dugme" href="#kontakt">Pošalji upit</a>
+        </div>
+      </section>
+
+      <!-- KONTAKT -->
+      <section class="kontakt" id="kontakt">
+        <div class="omotac kontakt-mreza">
+          <div class="kontakt-info">
+            <p class="nadnaslov">Kontakt</p>
+            <h2 class="naslov-sekcije">Recite mi svoju ideju</h2>
+            <p class="kontakt-tekst">
+              Popunite formu i opišite šta biste želeli da naslikam — kao i
+              željenu tehniku i okvirni format. Odgovoriću vam u najkraćem
+              mogućem roku.
+            </p>
+
+            <ul class="kontakt-drustvene" aria-label="Društvene mreže">
+              <li>
+                <a
+                  href="https://www.instagram.com/a56rtist"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-instagram"></use>
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/andjela.mihailovic.545402"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-facebook"></use>
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.threads.net/@a56rtist"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg class="ikona" aria-hidden="true">
+                    <use href="#ikona-threads"></use>
+                  </svg>
+                  <span>Threads</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="forma" data-forma novalidate>
+            <div class="polje">
+              <label for="ime">Ime i prezime</label>
+              <input
+                type="text"
+                id="ime"
+                name="ime"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="polje">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="polje">
+              <label for="tehnika">Kategorija / Tehnika</label>
+              <select id="tehnika" name="tehnika" required>
+                <option value="" selected disabled>Izaberite tehniku</option>
+                <option value="Ulje na platnu">Ulje na platnu</option>
+                <option value="Grafitna olovka">Grafitna olovka</option>
+                <option value="Ugalj">Ugalj</option>
+                <option value="Nisam siguran/na">Nisam siguran/na</option>
+              </select>
+            </div>
+
+            <div class="polje">
+              <label for="poruka">Poruka</label>
+              <textarea id="poruka" name="poruka" rows="5" required></textarea>
+            </div>
+
+            <button class="dugme dugme--pun forma-dugme" type="submit">
+              Pošalji upit
+            </button>
+
+            <p class="forma-poruka" role="status" data-forma-poruka hidden></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="omotac footer-unutrasnjost">
+        <p class="footer-tekst">
+          © 2026 Anđela Mihailović. Sva prava zadržana. Sve slike, crteži i
+          fotografije na ovoj stranici su autorsko delo i isključivo vlasništvo
+          Anđele Mihailović. Svako neovlašćeno preuzimanje, kopiranje ili
+          korišćenje bez izričite dozvole autorke je strogo zabranjeno.
+        </p>
+
+        <button class="footer-veza" type="button" data-otvori-privatnost>
+          Politika privatnosti i GDPR
+        </button>
+
+        <p class="footer-potpis">
+          Izrada sajta:
+          <a
+            href="https://kezicvizuali.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Kezić Vizuali</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- UVEĆANI PRIKAZ (LIGHTBOX) -->
+    <dialog class="lightbox" data-lightbox aria-label="Uvećani prikaz rada">
+      <div class="lightbox-unutrasnjost">
+        <button
+          class="lightbox-zatvori"
+          type="button"
+          aria-label="Zatvori uvećani prikaz"
+          data-zatvori
+        >
+          <span aria-hidden="true">✕</span>
+        </button>
+
+        <button
+          class="lightbox-strela lightbox-strela--prethodna"
+          type="button"
+          aria-label="Prethodni rad"
+          data-prethodni
+        >
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <figure class="lightbox-figura">
+          <img class="lightbox-slika" alt="" data-lightbox-slika />
+          <p class="lightbox-napomena" data-lightbox-napomena hidden>
+            Slika još nije dostupna.
+          </p>
+          <figcaption class="lightbox-opis">
+            <p class="lightbox-naziv" data-lightbox-naziv></p>
+            <p class="lightbox-detalji" data-lightbox-detalji></p>
+            <p class="lightbox-brojac" data-lightbox-brojac></p>
+          </figcaption>
+        </figure>
+
+        <button
+          class="lightbox-strela lightbox-strela--sledeca"
+          type="button"
+          aria-label="Sledeći rad"
+          data-sledeci
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </dialog>
+
+    <!-- POLITIKA PRIVATNOSTI -->
+    <dialog
+      class="modal"
+      data-privatnost
+      aria-labelledby="naslov-privatnosti"
+    >
+      <div class="modal-unutrasnjost">
+        <button
+          class="modal-zatvori"
+          type="button"
+          aria-label="Zatvori politiku privatnosti"
+          data-zatvori-privatnost
+        >
+          <span aria-hidden="true">✕</span>
+        </button>
+
+        <h2 class="modal-naslov" id="naslov-privatnosti">
+          Politika privatnosti i GDPR
+        </h2>
+
+        <p class="modal-tekst">
+          Politika privatnosti i zaštita podataka (GDPR): Vaša privatnost nam je
+          važna. Ova web stranica ne koristi kolačiće za praćenje niti
+          prikuplja lične podatke posetilaca u marketinške svrhe. Podaci koje
+          dobrovoljno unesete putem kontakt forme (ime, email adresa i sadržaj
+          poruke) koriste se isključivo radi odgovora na vaš upit ili dogovora
+          oko izrade umetničkog rada. Vaši podaci se ne čuvaju u bazama
+          podataka na sajtu, niti se dele sa trećim licima. U svakom trenutku
+          imate pravo da zatražite uvid, izmenu ili brisanje vaše komunikacije
+          slanjem zahteva putem kontakt emaila.
+        </p>
+
+        <button
+          class="dugme dugme--pun"
+          type="button"
+          data-zatvori-privatnost
+        >
+          Zatvori
+        </button>
+      </div>
+    </dialog>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
