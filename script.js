@@ -321,12 +321,12 @@ modalPrivatnost?.addEventListener("click", (e) => {
   if (e.target === modalPrivatnost) modalPrivatnost.close();
 });
 
-// KONTAKT FORMA
+// DIREKTNO SLANJE KONTAKT FORME NA MEJL (FORMSUBMIT AJAX)
 const forma = document.querySelector("[data-forma]");
 const formaPoruka = document.querySelector("[data-forma-poruka]");
 
 if (forma && formaPoruka) {
-  forma.addEventListener("submit", (e) => {
+  forma.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!forma.checkValidity()) {
       formaPoruka.textContent = "Molimo popunite sva obavezna polja ispravno.";
@@ -335,19 +335,56 @@ if (forma && formaPoruka) {
       return;
     }
 
+    const dugme = forma.querySelector('button[type="submit"]');
+    const originalniTekst = dugme ? dugme.textContent : "Pošalji upit";
+
+    if (dugme) {
+      dugme.disabled = true;
+      dugme.textContent = "Slanje upita...";
+    }
+
+    formaPoruka.textContent = "Šaljem vašu poruku, molimo sačekajte...";
+    formaPoruka.hidden = false;
+
     const ime = forma.ime.value.trim();
     const email = forma.email.value.trim();
     const tehnika = forma.tehnika.value;
     const poruka = forma.poruka.value.trim();
 
-    const naslov = encodeURIComponent(`Upit za portret — ${ime}`);
-    const telo = encodeURIComponent(
-      `Ime i prezime: ${ime}\nEmail: ${email}\nTehnika: ${tehnika}\n\nPoruka:\n${poruka}`
-    );
+    try {
+      const odgovor = await fetch(`https://formsubmit.co/ajax/${KONTAKT_MEJL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          "Ime i prezime": ime,
+          Email: email,
+          "Kategorija / Tehnika": tehnika,
+          Poruka: poruka,
+          _replyto: email,
+          _subject: `Novi upit za portret sa sajta — ${ime}`,
+          _template: "table"
+        })
+      });
 
-    formaPoruka.textContent = `Otvaram vaš program za e-poštu kako biste poslali upit na ${KONTAKT_MEJL}.`;
-    formaPoruka.hidden = false;
+      const rezultat = await odgovor.json();
 
-    window.location.href = `mailto:${KONTAKT_MEJL}?subject=${naslov}&body=${telo}`;
+      if (odgovor.ok && (rezultat.success === "true" || rezultat.success === true)) {
+        formaPoruka.textContent =
+          "Hvala vam! Vaš upit je uspešno poslat. Odgovoriću vam u najkraćem mogućem roku.";
+        forma.reset();
+      } else {
+        throw new Error("Neuspešno slanje");
+      }
+    } catch (greska) {
+      formaPoruka.textContent = `Došlo je do greške pri slanju. Možete poslati upit direktno na ${KONTAKT_MEJL}.`;
+    } finally {
+      if (dugme) {
+        dugme.disabled = false;
+        dugme.textContent = originalniTekst;
+      }
+    }
   });
 }
