@@ -62,11 +62,10 @@ const SVI_RADOVI = [
 const SLIDESHOW_RADOVI = [
   { kategorija: "Portreti kućnih ljubimaca", fajl: "Čuvar-Ulje na platnu, 20 × 30 cm, 2026.jpeg" },
   { kategorija: "Portreti kućnih ljubimaca", fajl: "Tišina kopita-Ulje na platnu, 50 × 40 cm, 2025.jpeg" },
-  { kategorija: "Portreti kućnih ljubimaca", fajl: "Prodornost-Ulje na papiru, format A5, 2025.jpeg" },
   { kategorija: "Portreti po želji", fajl: "Koreni-Ulje na platnu, 35 × 45 cm, 2026.jpeg" },
   { kategorija: "Portreti po želji", fajl: "Boje leta-Ulje na platnu, 50 × 40 cm, 2026.jpeg" },
-  { kategorija: "Crno-beli portreti", fajl: "Andrew-Grafitna olovka, format A4, 2024.jpeg" },
-  { kategorija: "Moji počeci", fajl: "Pogled večnosti-Ulje na platnu, 30 × 40 cm, 2024.jpeg" }
+  { kategorija: "Moji počeci", fajl: "Pogled večnosti-Ulje na platnu, 30 × 40 cm, 2024.jpeg" },
+  { kategorija: "Crno-beli portreti", fajl: "Andrew-Grafitna olovka, format A4, 2024.jpeg" }
 ];
 
 function generisiKandidatePutanja(kategorija, fajl) {
@@ -144,16 +143,12 @@ if (logoSlika) {
   });
 }
 
-// SLIDESHOW U HERO SEKCIJI
+// AMBIJENTALNA POZADINA U HERO SEKCIJI
 const scena = document.querySelector("[data-slideshow-scena]");
-const tockiceKontejner = document.querySelector("[data-slideshow-tockice]");
-const dugmePrethodna = document.querySelector("[data-slideshow-prethodna]");
-const dugmeSledeca = document.querySelector("[data-slideshow-sledeca]");
 
-if (scena && tockiceKontejner) {
+if (scena) {
   const slajdoviPodaci = SLIDESHOW_RADOVI.map(parsirajRad);
   let aktivniSlajd = 0;
-  let tajmer = null;
 
   slajdoviPodaci.forEach((rad, indeks) => {
     const slajd = document.createElement("div");
@@ -161,52 +156,21 @@ if (scena && tockiceKontejner) {
 
     const img = document.createElement("img");
     postaviSlikuSaRezervom(img, rad.kandidati);
-    img.alt = `${rad.naziv} — ${rad.detalji}`;
+    img.alt = "";
     if (indeks > 0) img.loading = "lazy";
 
-    const natpis = document.createElement("div");
-    natpis.className = "slajd-natpis";
-    natpis.innerHTML = `<strong>${rad.naziv}</strong> <span>${rad.detalji}</span>`;
-
-    slajd.append(img, natpis);
+    slajd.appendChild(img);
     scena.appendChild(slajd);
-
-    const tockica = document.createElement("button");
-    tockica.type = "button";
-    tockica.className = indeks === 0 ? "tockica aktivna" : "tockica";
-    tockica.setAttribute("aria-label", `Slika ${indeks + 1}: ${rad.naziv}`);
-    tockica.addEventListener("click", () => {
-      prikaziSlajd(indeks);
-      pokreniAutomatski();
-    });
-    tockiceKontejner.appendChild(tockica);
   });
 
   const sviSlajdovi = scena.querySelectorAll(".slajd");
-  const sveTockice = tockiceKontejner.querySelectorAll(".tockica");
 
-  function prikaziSlajd(noviIndeks) {
-    aktivniSlajd = (noviIndeks + sviSlajdovi.length) % sviSlajdovi.length;
-    sviSlajdovi.forEach((s, i) => s.classList.toggle("aktivan", i === aktivniSlajd));
-    sveTockice.forEach((t, i) => t.classList.toggle("aktivna", i === aktivniSlajd));
+  if (sviSlajdovi.length > 1) {
+    setInterval(() => {
+      aktivniSlajd = (aktivniSlajd + 1) % sviSlajdovi.length;
+      sviSlajdovi.forEach((s, i) => s.classList.toggle("aktivan", i === aktivniSlajd));
+    }, 5500);
   }
-
-  function pokreniAutomatski() {
-    clearInterval(tajmer);
-    tajmer = setInterval(() => prikaziSlajd(aktivniSlajd + 1), 4500);
-  }
-
-  dugmePrethodna?.addEventListener("click", () => {
-    prikaziSlajd(aktivniSlajd - 1);
-    pokreniAutomatski();
-  });
-
-  dugmeSledeca?.addEventListener("click", () => {
-    prikaziSlajd(aktivniSlajd + 1);
-    pokreniAutomatski();
-  });
-
-  pokreniAutomatski();
 }
 
 // GALERIJA I FILTERI
