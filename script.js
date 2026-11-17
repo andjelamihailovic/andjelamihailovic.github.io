@@ -1,4 +1,5 @@
 const KONTAKT_MEJL = "a56rtist@gmail.com";
+const WEB3FORMS_KLJUC = "27e7b068-9999-4f66-9df2-e1eacf126806";
 
 const OPISI_KATEGORIJA = {
   "Moji počeci":
@@ -321,31 +322,14 @@ modalPrivatnost?.addEventListener("click", (e) => {
   if (e.target === modalPrivatnost) modalPrivatnost.close();
 });
 
-// DIREKTNO SLANJE KONTAKT FORME NA MEJL (FORMSUBMIT POST)
+// DIREKTNO SLANJE KONTAKT FORME NA MEJL (WEB3FORMS)
 const forma = document.querySelector("[data-forma]");
 const formaPoruka = document.querySelector("[data-forma-poruka]");
 
 if (forma && formaPoruka) {
-  forma.action = `https://formsubmit.co/${KONTAKT_MEJL}`;
-  forma.method = "POST";
-
-  const skrivenaPolja = {
-    _subject: "Novi upit za portret sa sajta",
-    _template: "table",
-    _next: "https://andjelamihailovic.github.io/#kontakt"
-  };
-
-  Object.entries(skrivenaPolja).forEach(([naziv, vrednost]) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = naziv;
-    input.value = vrednost;
-    forma.appendChild(input);
-  });
-
-  forma.addEventListener("submit", (e) => {
+  forma.addEventListener("submit", async (e) => {
+    e.preventDefault();
     if (!forma.checkValidity()) {
-      e.preventDefault();
       formaPoruka.textContent = "Molimo popunite sva obavezna polja ispravno.";
       formaPoruka.hidden = false;
       forma.reportValidity();
@@ -353,6 +337,8 @@ if (forma && formaPoruka) {
     }
 
     const dugme = forma.querySelector('button[type="submit"]');
+    const originalniTekst = dugme ? dugme.textContent : "Pošalji upit";
+
     if (dugme) {
       dugme.disabled = true;
       dugme.textContent = "Slanje upita...";
@@ -360,5 +346,46 @@ if (forma && formaPoruka) {
 
     formaPoruka.textContent = "Šaljem vašu poruku, molimo sačekajte...";
     formaPoruka.hidden = false;
+
+    const ime = forma.ime.value.trim();
+    const email = forma.email.value.trim();
+    const tehnika = forma.tehnika.value;
+    const poruka = forma.poruka.value.trim();
+
+    try {
+      const odgovor = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KLJUC,
+          subject: `Novi upit za portret sa sajta — ${ime}`,
+          from_name: "Portfolio Anđela Mihailović",
+          "Ime i prezime": ime,
+          Email: email,
+          "Kategorija / Tehnika": tehnika,
+          Poruka: poruka
+        })
+      });
+
+      const rezultat = await odgovor.json();
+
+      if (odgovor.ok && rezultat.success) {
+        formaPoruka.textContent =
+          "Hvala vam! Vaš upit je uspešno poslat. Odgovoriću vam u najkraćem mogućem roku.";
+        forma.reset();
+      } else {
+        throw new Error(rezultat.message || "Neuspešno slanje");
+      }
+    } catch (greska) {
+      formaPoruka.textContent = `Došlo je do greške pri slanju. Možete poslati upit direktno na ${KONTAKT_MEJL}.`;
+    } finally {
+      if (dugme) {
+        dugme.disabled = false;
+        dugme.textContent = originalniTekst;
+      }
+    }
   });
 }
